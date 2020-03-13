@@ -6,12 +6,7 @@
 
 ```
 Plug 'wsdjeg/async-dict', {'do': 'cargo build'}
-call deoplete#custom#var('minigrep', 'minigrep_executable', {
-            \ '_':  'minigrep',
-            \})
-call deoplete#custom#var('minigrep', 'dicts', {
-            \ '_':  'path/to/words.txt',
-            \})
+let g:async_dicts = '~/.dict/words.txt'
 ```
 
 

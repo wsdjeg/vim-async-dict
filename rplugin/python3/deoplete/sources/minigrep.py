@@ -18,7 +18,7 @@ class Source(Base):
         self.is_volatile = True
         self.words = None
         self.minigrep_executable = 'minigrep'
-        self.dicts = ''
+        self.dicts = r'C:\Users\wsdjeg\DotFiles\dict\words.txt'
 
     def _query_look(self, querystring):
         command = [self.minigrep_executable, querystring, self.dicts]

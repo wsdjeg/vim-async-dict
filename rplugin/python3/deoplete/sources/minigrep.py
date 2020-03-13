@@ -17,9 +17,11 @@ class Source(Base):
         self.min_pattern_length = 2
         self.is_volatile = True
         self.words = None
+        self.minigrep_executable = 'minigrep'
+        self.dicts = ''
 
     def _query_look(self, querystring):
-        command = [r'f:\minigrep\target\debug\minigrep.exe', querystring]
+        command = [self.minigrep_executable, querystring, self.dicts]
 
         if self.words is not None:
             command.append(self.words)

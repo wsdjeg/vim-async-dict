@@ -15,10 +15,20 @@ class Source(Base):
         self.name = 'minigrep'
         self.mark = '[D]'
         self.min_pattern_length = 2
+
+        def get_look_var(shortname, default):
+            name = 'async_{}'.format(shortname)
+            if name not in vim.vars:
+                return default
+            return vim.vars[name]
+
+
         self.is_volatile = True
         self.words = None
         self.minigrep_executable = 'minigrep'
-        self.dicts = r'C:\Users\wsdjeg\DotFiles\dict\words.txt'
+        self.dicts = get_look_var('dicts', None)
+        if self.dicts:
+            self.dicts = expandvars(expanduser(self.dicts))
 
     def _query_look(self, querystring):
         command = [self.minigrep_executable, querystring, self.dicts]

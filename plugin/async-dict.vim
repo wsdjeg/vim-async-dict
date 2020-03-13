@@ -4,7 +4,7 @@ if !exists('g:async_dicts')
     " >
     "   let g:async_dicts = '~/words/dict.txt'
     " <
-    let g:async_dicts = []
+    let g:async_dicts = ''
 endif
 
 if !exists('g:async_minigrep_executable')

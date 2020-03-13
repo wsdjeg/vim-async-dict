@@ -1,6 +1,6 @@
 #=============================================================================
-# FILE: look.py
-# AUTHOR: Shougo Matsushita <Shougo.Matsu at gmail.com>
+# FILE: dict.py
+# AUTHOR: Shidong Wang <wsdjeg@outlook.com>
 #=============================================================================
 
 from os.path import expanduser, expandvars
@@ -12,9 +12,9 @@ class Source(Base):
     def __init__(self, vim):
         Base.__init__(self, vim)
 
-        self.name = 'minigrep'
+        self.name = 'dict'
         self.mark = '[D]'
-        self.min_pattern_length = 2
+        self.min_pattern_length = 4
 
         def get_look_var(shortname, default):
             name = 'async_{}'.format(shortname)
@@ -25,7 +25,7 @@ class Source(Base):
 
         self.is_volatile = True
         self.words = None
-        self.minigrep_executable = 'minigrep'
+        self.minigrep_executable = get_look_var('minigrep_executable', 'minigrep')
         self.dicts = get_look_var('dicts', None)
         if self.dicts:
             self.dicts = expandvars(expanduser(self.dicts))

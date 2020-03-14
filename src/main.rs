@@ -50,7 +50,7 @@ fn find_start(words: &String, query: &String) -> Vec<String> {
     for word in words.lines() {
         if word.starts_with(&query[..]) {
             println!("{}", word);
-        }else{
+        }else if word.contains(&query[..]){
             another.push(String::from(word));
         }
     }

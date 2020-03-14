@@ -74,17 +74,26 @@ fn split_word(st: &str) -> Vec<String> {
     let mut word = String::new();
     for c in st.chars() {
         if c >= 'a' && c <= 'z' {
-            word.push(c.clone());
+            word.push(c);
         } else if c >= 'A' && c <= 'Z' {
             if !word.is_empty() {
                 words.push(word.clone());
                 word.clear();
             }
-            word.push(c.clone());
+            word.push(c);
         }
     }
     if !word.is_empty() {
         words.push(word.clone());
     }
     words
+}
+
+#[test]
+fn split_word_test() {
+    let str = "HelloWorld";
+    let mut rst: Vec<String> = Vec::new();
+    rst.push("Hello".to_string());
+    rst.push("World".to_string());
+    assert_eq!(rst, split_word(str));
 }

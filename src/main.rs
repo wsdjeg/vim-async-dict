@@ -2,24 +2,23 @@ use std::fs;
 #[allow(unused_imports)]
 use std::process;
 fn main() {
-    #[allow(unused_variables)]
     let args: Vec<String> = std::env::args().collect();
     if args.len() == 2 {
         if args[1] == String::from("-v") {
             version();
             process::exit(0);
-        }else if args[1] == String::from("-h") {
+        } else if args[1] == String::from("-h") {
             help();
             process::exit(0);
         }
     }
     let config = Config::new(&args).unwrap_or_else(|err| {
-    println!("Problem parsing arguments: {}", err);
-    process::exit(1);
+        println!("Problem parsing arguments: {}", err);
+        process::exit(1);
     });
     // let config = Config {
-        // query: String::from("ru"),
-        // filename: String::from(r"C:\Users\wsdjeg\DotFiles\dict\words.txt"),
+    // query: String::from("ru"),
+    // filename: String::from(r"C:\Users\wsdjeg\DotFiles\dict\words.txt"),
     // };
     let words = fs::read_to_string(config.filename).expect("");
     find_start(&words, &config.query);
@@ -66,4 +65,25 @@ fn help() {
     version();
     println!("{}", "USAGE");
     println!("{}", "      minigrep <query> <filename>");
+}
+
+#[allow(dead_code)]
+fn split_word(st: &str) -> Vec<String> {
+    let mut words: Vec<String> = Vec::new();
+    let mut word = String::new();
+    for c in st.chars() {
+        if c >= 'a' && c <= 'z' {
+            word.push(c.clone());
+        } else if c >= 'A' && c <= 'Z' {
+            if !word.is_empty() {
+                words.push(word.clone());
+                word.clear();
+            }
+            word.push(c.clone());
+        }
+    }
+    if !word.is_empty() {
+        words.push(word.clone());
+    }
+    words
 }

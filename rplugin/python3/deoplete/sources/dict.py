@@ -14,7 +14,7 @@ class Source(Base):
 
         self.name = 'dict'
         self.mark = '[D]'
-        self.min_pattern_length = 4
+        self.min_pattern_length = 3
 
         def get_look_var(shortname, default):
             name = 'async_{}'.format(shortname)

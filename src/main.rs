@@ -21,11 +21,9 @@ fn main() {
     // filename: String::from(r"C:\Users\wsdjeg\DotFiles\dict\words.txt"),
     // };
     let words = fs::read_to_string(config.filename).expect("");
-    find_start(&words, &config.query);
-    for word in words.lines() {
-        if word.contains(&config.query) && !word.starts_with(&config.query) {
-            println!("{}", word);
-        }
+    let another: Vec<String> = find_start(&words, &config.query);
+    for word in another {
+        println!("{}", word);
     }
 }
 
@@ -46,14 +44,17 @@ impl Config {
     }
 }
 
-fn find_start(words: &String, query: &String) {
-    #[allow(unused_variables)]
-    let i: i32 = query.len() as i32;
+// find the words start with query.
+fn find_start(words: &String, query: &String) -> Vec<String> {
+    let mut another: Vec<String> = vec![];
     for word in words.lines() {
-        if word.starts_with(&query[..1]) && word.contains(&query.clone()) {
+        if word.starts_with(&query[..]) {
             println!("{}", word);
+        }else{
+            another.push(String::from(word));
         }
     }
+    another
 }
 
 fn version() {

@@ -13,14 +13,14 @@ fn main() {
             process::exit(0);
         }
     }
-    // let config = Config::new(&args).unwrap_or_else(|err| {
-    // println!("Problem parsing arguments: {}", err);
-    // process::exit(1);
-    // });
-    let config = Config {
-        query: String::from("ru"),
-        filename: String::from(r"C:\Users\wsdjeg\DotFiles\dict\words.txt"),
-    };
+    let config = Config::new(&args).unwrap_or_else(|err| {
+    println!("Problem parsing arguments: {}", err);
+    process::exit(1);
+    });
+    // let config = Config {
+        // query: String::from("ru"),
+        // filename: String::from(r"C:\Users\wsdjeg\DotFiles\dict\words.txt"),
+    // };
     let words = fs::read_to_string(config.filename).expect("");
     find_start(&words, &config.query);
     for word in words.lines() {

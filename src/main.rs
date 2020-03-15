@@ -21,9 +21,11 @@ fn main() {
     // filename: String::from(r"C:\Users\wsdjeg\DotFiles\dict\words.txt"),
     // };
     let words = fs::read_to_string(config.filename).expect("");
-    let another: Vec<String> = find_start(&words, &config.query);
-    for word in another {
-        println!("{}", word);
+    let another: Vec<Vec<String>> = find_start(&words, &config.query);
+    for words in another {
+        for word in words {
+            println!("{}", word);
+        }
     }
 }
 
@@ -45,16 +47,24 @@ impl Config {
 }
 
 // find the words start with query.
-fn find_start(words: &String, query: &String) -> Vec<String> {
+fn find_start(words: &String, query: &String) -> Vec<Vec<String>> {
+    let mut rst: Vec<Vec<String>> = vec![];
+    // 首字母匹配 + contains
+    let mut words1: Vec<String> = vec![];
+    //  contains
     let mut another: Vec<String> = vec![];
     for word in words.lines() {
         if word.starts_with(&query[..]) {
             println!("{}", word);
+        }else if word.starts_with(&query[..1]) && word.contains(&query[1..]) {
+            words1.push(String::from(word));
         }else if word.contains(&query[..]){
             another.push(String::from(word));
         }
     }
-    another
+    rst.push(words1);
+    rst.push(another);
+    rst
 }
 
 fn version() {

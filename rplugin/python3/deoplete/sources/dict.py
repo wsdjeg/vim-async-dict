@@ -45,7 +45,7 @@ class Source(Base):
             # the rest.
             words = [
                 x.decode(context['encoding'], errors='ignore')
-                for x in self._query_look(context['complete_str'][:2])
+                for x in self._query_look(context['complete_str'][:2].lower())
             ]
         except subprocess.CalledProcessError:
             return []
